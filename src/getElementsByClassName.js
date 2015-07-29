@@ -4,7 +4,11 @@
 // };
 
 // But instead we're going to implement it from scratch:
-var getElementsByClassName = function(className
-){
-  // your code here
+
+var getElementsByClassName = function(className, element) {
+  var element = element || document.body;
+  var res = _.contains(element.classList, className) ? [element] : [];
+  return _.reduce(element.childNodes, function(acc, child) {
+    return acc.concat(getElementsByClassName(className, child))
+  }, res);
 };
